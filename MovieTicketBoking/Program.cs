@@ -44,6 +44,7 @@ namespace MovieTicketBoking
 
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
+                        new SearchMovieScenario(movies).Run();
                         break;
 
                     case ConsoleKey.D2:
@@ -56,9 +57,7 @@ namespace MovieTicketBoking
                         break;
                     case ConsoleKey.D4:
                     case ConsoleKey.NumPad4:
-                        reservationAsString = File.ReadAllText(pathToReservetionFile);
-                        reservations = JsonConvert.DeserializeObject<List<Reservation>>(reservationAsString);
-                        CancellationOfReservation(movies, reservations, pathToMoviesFile, pathToReservetionFile);
+                        new CancellationOfReservation(movies, reservations, pathToMoviesFile, pathToReservetionFile).Run();
                         break;
                     case ConsoleKey.D5:
                     case ConsoleKey.NumPad5:
@@ -70,50 +69,7 @@ namespace MovieTicketBoking
 
         }
 
-        private static void CancellationOfReservation(List<Movie> movies, List<Reservation> reservations, string pathToMoviesFile, string pathToReservetionFile)
-        {
-            try
-            {
-                Console.WriteLine();
-                Console.Write("Enter the number of movie:");
-
-                int movieNumber = Convert.ToInt32(Console.ReadLine());
-                var selectMovie = movies[movieNumber-1];
-
-                Console.Clear();
-                Console.Write("Enter the number phone of order:");
-                var reservationPhoneNumber = Convert.ToInt32(Console.ReadLine());
-
-                var deleteReservation = reservations.Where(obj => (obj.PhoneNumber == reservationPhoneNumber) && (selectMovie.Id == obj.MovieId));
-                var deleteReservationId = reservations.LastIndexOf(deleteReservation.FirstOrDefault());
-
-                var reservationMovie = reservations[deleteReservationId];
-
-                reservationMovie.ValidatAvailableMovie(selectMovie.Id, selectMovie.Title);
-                reservationMovie.ValidatAvailableNumberOfPhone(reservationPhoneNumber);
-
-                
-                File.WriteAllText(pathToMoviesFile, JsonConvert.SerializeObject(movies, Formatting.Indented));
-
-                reservations.RemoveAt(deleteReservationId);
-                File.WriteAllText(pathToReservetionFile, JsonConvert.SerializeObject(reservations, Formatting.Indented));
-
-                Console.WriteLine("Yout book was delete");
-                Console.WriteLine("Press enter to go back");
-
-                
-            }
-            catch (NoPhoneNumberException exception)
-            {
-                Console.WriteLine();
-                Console.WriteLine(exception.Message);
-            }
-            catch(NotMovieException exception)
-            {
-                Console.WriteLine();
-                Console.WriteLine(exception.Message);
-            }
-        }
+        
 
         private static void RenderMainMenu()
         {
@@ -197,23 +153,6 @@ namespace MovieTicketBoking
             FullName = fullName;
             PhoneNumber = phoneNumber;
             NumberSeats = numberSeats;
-        }
-        
-
-        internal void ValidatAvailableNumberOfPhone(int reservationPhoneNumber)
-        {
-            if (PhoneNumber != reservationPhoneNumber)
-            {
-                throw new NoPhoneNumberException("There's no such number!");
-            }
-        }
-
-        internal void ValidatAvailableMovie(Guid id, string title)
-        {
-            if (MovieId != id)
-            {
-                throw new NotMovieException($"There's no booking! {title}");
-            }
         }
     }
 }
