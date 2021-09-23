@@ -4,24 +4,19 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using MovieTicketBoking.Repositories;
 
 namespace MovieTicketBoking.Scenarios
 {
     public class BookMovieScenario : IRunnable
     {
-        private List<Movie> _movies;
-        private List<Reservation> _reservations;
+        private MovieRepository _movieRepository;
+        private ReservationRepository _reservationRepository;
 
-        private string _pathToReservetionFile;
-        private string _pathToMoviesFile;
-        
-
-        public BookMovieScenario(List<Movie> movies, List<Reservation> reservations, string pathToMoviesFile, string pathToReservetionFile)
+        public BookMovieScenario(MovieRepository movieRepository, ReservationRepository reservationRepository)
         {
-            _movies = movies;
-            _reservations = reservations;
-            _pathToMoviesFile = pathToMoviesFile;
-            _pathToReservetionFile = pathToReservetionFile;
+            _movieRepository = movieRepository;
+            _reservationRepository = reservationRepository;
         }
 
         public void Run()
@@ -34,7 +29,7 @@ namespace MovieTicketBoking.Scenarios
                 // Get movies
 
                 int movieNumber = Convert.ToInt32(Console.ReadLine());
-                var selectedMovie = _movies[movieNumber - 1];
+                var selectedMovie = _movieRepository.GetAll()[movieNumber - 1];
 
                 selectedMovie.ValidatAvailableSeats();
 
@@ -55,10 +50,10 @@ namespace MovieTicketBoking.Scenarios
                 ///
 
                 selectedMovie.BookRequestedSeats(numberSeats);
-                _reservations.Add(new Reservation(selectedMovie.Id, fullName, phoneNumber, numberSeats));
+                _reservationRepository.GetAll().Add(new Reservation(selectedMovie.Id, fullName, phoneNumber, numberSeats));
 
-                File.WriteAllText(_pathToReservetionFile, JsonConvert.SerializeObject(_reservations, Formatting.Indented));
-                File.WriteAllText(_pathToMoviesFile, JsonConvert.SerializeObject(_movies, Formatting.Indented));
+                _reservationRepository.Save();
+                _movieRepository.Save();
 
             }
             catch (NoEnoughtSeatsException exception)

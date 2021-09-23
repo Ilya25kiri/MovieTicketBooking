@@ -10,11 +10,17 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Exception\" />
     <None Remove="Scenario\" />
+    <None Remove="SpecialScenarios\" />
+    <None Remove="Repositories\" />
+    <None Remove="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Scenarios\" />
+    <Folder Include="SpecialScenarios\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

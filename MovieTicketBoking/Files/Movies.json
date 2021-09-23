@@ -2,46 +2,73 @@
   {
     "Id": "c5d46e2f-757e-470c-8831-e3a84e6134bf",
     "Title": "Pulp Fiction",
-    "NumberOfFreeSeats": 0
+    "NumberOfFreeSeats": 35,
+    "Rating": 9,
+    "Genre": "Crime",
+    "Comment": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption."
   },
   {
     "Id": "b5179375-7869-49cf-b891-1bcca2402fb7",
     "Title": "Schindler's List",
-    "NumberOfFreeSeats": 2
+    "NumberOfFreeSeats": 40,
+    "Rating": 9,
+    "Genre": "Biography",
+    "Comment": "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis."
   },
   {
     "Id": "393fe171-29fa-402d-aee5-f9ba6d55aa31",
     "Title": "The Dark Knight",
-    "NumberOfFreeSeats": 3
+    "NumberOfFreeSeats": 45,
+    "Rating": 9,
+    "Genre": "Action",
+    "Comment": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice."
   },
   {
     "Id": "fd8e4d8e-e408-4ef4-b1fe-2d48088b5d18",
     "Title": "The Godfather",
-    "NumberOfFreeSeats": 3
+    "NumberOfFreeSeats": 50,
+    "Rating": 9,
+    "Genre": "Crime",
+    "Comment": "An organized crime dynasty's aging patriarch transfers control of his clandestine empire to his reluctant son."
   },
   {
     "Id": "6891b08f-6641-4455-a6ed-953e27c74d8d",
     "Title": "The Godfather: Part II",
-    "NumberOfFreeSeats": 1
+    "NumberOfFreeSeats": 30,
+    "Rating": 9,
+    "Genre": "Crime",
+    "Comment": "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate."
   },
   {
     "Id": "472e7055-7e0d-42c5-a440-962160119acd",
     "Title": "The Good, the Bad and the Ugly",
-    "NumberOfFreeSeats": 3
+    "NumberOfFreeSeats": 50,
+    "Rating": 9,
+    "Genre": "Western",
+    "Comment": "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery."
   },
   {
     "Id": "0bddd28f-83df-4330-b348-8a0878760f94",
     "Title": "The Lord of the Rings: The Fellowship of the Ring",
-    "NumberOfFreeSeats": 3
+    "NumberOfFreeSeats": 45,
+    "Rating": 9,
+    "Genre": "Action",
+    "Comment": "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron."
   },
   {
     "Id": "3f0736df-e08f-455c-8507-f934f0583838",
     "Title": "The Lord of the Rings: The Return of the King",
-    "NumberOfFreeSeats": 3
+    "NumberOfFreeSeats": 35,
+    "Rating": 9,
+    "Genre": "Action",
+    "Comment": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
   },
   {
     "Id": "ae1e4ace-7d9a-415a-bd80-65763ff8b6f3",
     "Title": "The Shawshank Redemption",
-    "NumberOfFreeSeats": 2
+    "NumberOfFreeSeats": 40,
+    "Rating": 9,
+    "Genre": "Drama",
+    "Comment": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
   }
 ]

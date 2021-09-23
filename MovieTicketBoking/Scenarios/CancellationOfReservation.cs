@@ -4,23 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using MovieTicketBoking.Repositories;
 
 namespace MovieTicketBoking.Scenarios
 {
     public class CancellationOfReservation : IRunnable
     {
-        private List<Movie> _movies;
-        private List<Reservation> _reservations;
+        private MovieRepository _movieRepository;
+        private ReservationRepository _reservationRepository;
 
-        private string _pathToReservetionFile;
-        private string _pathToMoviesFile;
-
-        public CancellationOfReservation(List<Movie> movies, List<Reservation> reservations, string pathToMoviesFile, string pathToReservetionFile)
+        public CancellationOfReservation(MovieRepository movieRepository, ReservationRepository reservationRepository)
         {
-            _movies = movies;
-            _reservations = reservations;
-            _pathToMoviesFile = pathToMoviesFile;
-            _pathToReservetionFile = pathToReservetionFile;
+            _movieRepository = movieRepository;
+            _reservationRepository = reservationRepository;
         }
         public void Run()
         {
@@ -30,19 +26,19 @@ namespace MovieTicketBoking.Scenarios
                 Console.Write("Enter the number of movie:");
 
                 int movieNumber = Convert.ToInt32(Console.ReadLine());
-                var selectMovie = _movies[movieNumber - 1];
+                var selectMovie = _movieRepository.GetAll()[movieNumber - 1];
 
                 Console.Clear();
                 Console.Write("Enter the number phone of order:");
                 var reservationPhoneNumber = Convert.ToInt32(Console.ReadLine());
 
-                var reservationToCancel = _reservations.Where(obj => (obj.PhoneNumber == reservationPhoneNumber)
-                                                                  && (selectMovie.Id == obj.MovieId)).First();
+                var reservationToCancel = _reservationRepository.FindReservation(reservationPhoneNumber, selectMovie);
 
-                File.WriteAllText(_pathToMoviesFile, JsonConvert.SerializeObject(_movies, Formatting.Indented));
+                selectMovie.NumberOfFreeSeats += reservationToCancel.NumberSeats;
+                _movieRepository.Save();
 
-                _reservations.Remove(reservationToCancel);
-                File.WriteAllText(_pathToReservetionFile, JsonConvert.SerializeObject(_reservations, Formatting.Indented));
+                _reservationRepository.GetAll().Remove(reservationToCancel);
+                _reservationRepository.Save();
 
                 Console.WriteLine("Yout book was delete");
             }
